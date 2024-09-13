@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <button onclick="getPersonagens()">Cria Tabela</button>
+  
+
+  <script>
+    const url = 'https://rickandmortyapi.com/api/character/1,2,3,4,5'
+    
+    function criaTabela(dados) {
+      // Criando a tabela e os elementos associados
+      let table = document.createElement('table');
+      let headerRow = document.createElement('tr');
+      let headers = ['Nome', 'Status', 'Espécie'];
+
+      headers.forEach(headerText => {
+        let header = document.createElement('th');
+        header.textContent = headerText;
+        headerRow.appendChild(header);
+      });
+
+      table.appendChild(headerRow);
+
+      // Adicionando linhas de dados à tabela
+     /* let data = [
+                ['Alice', 30, 'Engenheira de Software'],
+                ['Bob', 25, 'Designer'],
+                ['Carol', 28, 'Gerente de Projetos']
+            ];*/
+
+      dados.forEach(rowData => {
+        let row = document.createElement('tr');
+        rowData.forEach(cellData => {
+          let cell = document.createElement('td');
+          cell.textContent = cellData;
+          row.appendChild(cell);
+        });
+        table.appendChild(row);
+      });
+
+      // Adicionando a tabela ao corpo do documento
+      document.body.appendChild(table)
+    }
+    
+    async function getPersonagens(){
+      
+        const personagens = [];
+    
+        const responde = await fetch(url);
+        const data = await responde.json();
+        console.log(data);
+      
+        data.map((personagem) => {
+         
+         personagens.push([personagem.name,personagem.status, personagem.species]);
+         
+      
+         
+         
+        })
+        criaTabela(personagens);
+        
+    }
+    
+  </script>
+</body>
+
+</html>
