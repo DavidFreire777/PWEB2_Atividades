@@ -13,7 +13,7 @@
   
 
   <script>
-    const url = 'https://rickandmortyapi.com/api/character/1,2,3,4,5'
+    const url = 'https://rickandmortyapi.com/api/character/1,2,3,44,57'
     
     function criaTabela(dados) {
       // Criando a tabela e os elementos associados
@@ -30,12 +30,6 @@
       table.appendChild(headerRow);
 
       // Adicionando linhas de dados à tabela
-     /* let data = [
-                ['Alice', 30, 'Engenheira de Software'],
-                ['Bob', 25, 'Designer'],
-                ['Carol', 28, 'Gerente de Projetos']
-            ];*/
-
       dados.forEach(rowData => {
         let row = document.createElement('tr');
         rowData.forEach(cellData => {
@@ -50,14 +44,13 @@
       document.body.appendChild(table)
     }
     
+    // Obter dados fa API
     async function getPersonagens(){
       
         const personagens = [];
-    
         const responde = await fetch(url);
         const data = await responde.json();
-        console.log(data);
-      
+          
         data.map((personagem) => {
          
          personagens.push([personagem.name,personagem.status, personagem.species]);
